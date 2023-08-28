@@ -4,6 +4,7 @@
   "description": "A Content Preserving transformations on PDFs wrapped around QPDF",
   "main": "./dist/index.js",
   "scripts": {
+    "prepare": "npm run build",
     "test": "c8 --reporter=lcov --reporter=text --all --include=src ava test/ --timeout=30s",
     "lint": "eslint --ignore-path .gitignore '**/*.[jt]s'",
     "build": "tsc -p tsconfig.build.json"
