@@ -19,11 +19,11 @@ export default (callArguments: string[]): Promise<Buffer> => {
       reject(error);
     });
     process.on("close", (code) => {
-      if (code !== 0) {
+      if (code === 0) {
+        resolve(Buffer.concat(stdout));
+      } else {
         // There is a problem from qpdf
         reject(Buffer.from(stderr.join("")).toLocaleString());
-      } else {
-        resolve(Buffer.concat(stdout));
       }
     });
   });

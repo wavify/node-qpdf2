@@ -1,4 +1,3 @@
-export type { DecryptSettings } from "./decrypt";
-export { decrypt } from "./decrypt";
-export type { EncryptOptions } from "./encrypt";
-export { encrypt } from "./encrypt";
+export { decrypt, type DecryptSettings } from "./decrypt.js";
+export { encrypt, type EncryptOptions } from "./encrypt.js";
+export { info, type InfoSettings } from "./info.js";
