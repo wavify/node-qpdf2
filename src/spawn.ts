@@ -5,7 +5,7 @@ import { spawn } from "node:child_process";
 export default (callArguments: string[]): Promise<Buffer> => {
   return new Promise((resolve, reject) => {
     const process = spawn("qpdf", callArguments);
-    const stdout: string[] = [];
+    const stdout: Buffer[] = [];
     const stderr: string[] = [];
     process.stdout.on("data", (data) => {
       stdout.push(data);
@@ -23,7 +23,7 @@ export default (callArguments: string[]): Promise<Buffer> => {
         // There is a problem from qpdf
         reject(Buffer.from(stderr.join("")).toLocaleString());
       } else {
-        resolve(Buffer.from(stdout.join("")));
+        resolve(Buffer.concat(stdout));
       }
     });
   });
