@@ -21,7 +21,15 @@ export default (callArguments: string[]): Promise<Buffer> => {
     process.on("close", (code) => {
       if (code !== 0) {
         // There is a problem from qpdf
-        reject(Buffer.from(stderr.join("")).toLocaleString());
+        const errorString: string = Buffer.from(
+          stderr.join("")
+        ).toLocaleString();
+        if (errorString.includes("operation succeeded with warnings")) {
+          // Ignore warnong case
+          resolve(Buffer.concat(stdout));
+        } else {
+          reject(errorString);
+        }
       } else {
         resolve(Buffer.concat(stdout));
       }
